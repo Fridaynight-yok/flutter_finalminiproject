@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_finalminiproject/login.dart';
 //import 'package:image_picker/image_picker.dart';
 
 class Register extends StatefulWidget {
@@ -75,6 +76,10 @@ class _RegisterState extends State<Register> {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text("Register complete")));
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+        );
       }
     } catch (e) {
       ScaffoldMessenger.of(
@@ -169,7 +174,12 @@ class _RegisterState extends State<Register> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ElevatedButton(onPressed: () {}, child: Text("Cancel")),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context); //popคือกลับมา1อัน
+                },
+                child: Text("Cancel"),
+              ),
               ElevatedButton(
                 onPressed: () {
                   registerUser();

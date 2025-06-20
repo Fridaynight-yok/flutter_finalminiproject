@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_finalminiproject/home.dart';
+import 'package:flutter_finalminiproject/register.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -91,7 +92,15 @@ class _LoginState extends State<Login> {
                 },
                 child: Text("Login"),
               ),
-              ElevatedButton(onPressed: () {}, child: Text("Register")),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Register()),
+                  );
+                },
+                child: Text("Register"),
+              ),
             ],
           ),
         ],
