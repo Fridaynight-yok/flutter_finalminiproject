@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_finalminiproject/home.dart';
 import 'package:flutter_finalminiproject/login.dart';
 import 'package:flutter_finalminiproject/register.dart';
 
@@ -36,5 +38,25 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(title: Text('Home'), centerTitle: true));
+  }
+}
+
+class AuthWrap extends StatelessWidget {
+  const AuthWrap({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasData) {
+          return Home();
+        } else {
+          return Login();
+        }
+      },
+    );
   }
 }

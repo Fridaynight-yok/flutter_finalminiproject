@@ -12,7 +12,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<dynamic> cats = [];
+  static List<dynamic> cats =
+      []; //static คือการคงค่านั้นไว้ กลับมาhome, it will not refresh
+  static bool fetchCat = false;
   final Dio dio = Dio();
   bool isLoading =
       false; //ทำให้รู้ว่า something is laoding (มีของ = loading is false)
@@ -53,7 +55,10 @@ class _HomeState extends State<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchCats();
+    if (!fetchCat) {
+      fetchCats();
+      fetchCat = true;
+    }
   }
 
   @override
